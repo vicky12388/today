@@ -7,7 +7,10 @@
       }}</van-button>
     </van-cell>
     <van-grid class="my-grid" :gutter="10">
-      <van-grid-item class="grid-item" v-for="(channel, index) in myChannels" :key="index"
+      <van-grid-item 
+        class="grid-item"
+        v-for="(channel, index) in myChannels"
+        :key="index"
         @click="onMyChannelClick(channel, index)">
         <!--
           v-bind:class 语法
@@ -16,8 +19,15 @@
                       true，则作用该类名
                       false，不作用类名
          -->
-        <van-icon v-show="isEdit && !fiexdChannels.includes(channel.id)" slot="icon" name="clear"></van-icon>
-        <span class="text" :class="{ active: index === active }" slot="text">{{ channel.name }}</span>
+        <van-icon 
+          v-show="isEdit && !fiexdChannels.includes(channel.id)"
+          slot="icon"
+          name="clear"
+          ></van-icon>
+        <span class="text"
+          :class="{ active: index === active }"
+          slot="text"
+          >{{ channel.name }}</span>
       </van-grid-item>
     </van-grid>
 
@@ -26,10 +36,15 @@
       <div slot="title" class="title-text">频道推荐</div>
     </van-cell>
     <van-grid class="recommend-grid" :gutter="10">
-      <van-grid-item class="grid-item" v-for="(channel, index) in recommendChannels" :key="index" icon="plus"
-        :text="channel.name" @click="onAddChannel(channel)" />
+      <van-grid-item 
+        class="grid-item"
+        v-for="(channel, index) in recommendChannels"
+        :key="index" icon="plus"
+        :text="channel.name"
+        @click="onAddChannel(channel)" />
     </van-grid>
-    <!-- /频道推荐 -->
+   
+   <!-- /频道推荐 -->
   </div>
 </template>
 
@@ -69,33 +84,12 @@ export default {
     recommendChannels() {
       // 数组的 filter 方法：遍历数组，把符合条件的元素存储到新数组中并返回
       return this.allChannels.filter(channel => {
-        // const channels = []
-
         // 数组的 find 方法：遍历数组，把符合条件的第1个元素返回
         return !this.myChannels.find(myChannel => {
           return myChannel.id === channel.id
         })
-
-        // return channels
       })
     }
-    // recommendChannels () {
-    //   const channels = []
-    //   this.allChannels.forEach(channel => {
-    //     // find 遍历数组，找到满足条件的元素项
-    //     const ret = this.myChannels.find(myChannel => {
-    //       return myChannel.id === channel.id
-    //     })
-
-    //     // 如果我的频道中不包括该频道项，则收集到推荐频道中
-    //     if (!ret) {
-    //       channels.push(channel)
-    //     }
-    //   })
-
-    //   // 把计算结果返回
-    //   return channels
-    // }
   },
   watch: {},
   created() {
@@ -122,7 +116,8 @@ export default {
           await addUserChannel({
             id: channel.id, // 频道ID
             seq: this.myChannels.length // 序号
-          })
+          });
+          setItem("USER_TOUTIAO_CHANNELS".this.myChannels)
         } catch (err) {
           this.$toast('保存失败，请稍后重试')
         }
@@ -131,8 +126,7 @@ export default {
         setItem('TOUTIAO_CHANNELS', this.myChannels)
       }
     },
-
-    onMyChannelClick(channel, index) {
+  onMyChannelClick(channel, index) {
       if (this.isEdit) {
         // 1. 如果是固定频道，则不删除
         if (this.fiexdChannels.includes(channel.id)) {
@@ -141,7 +135,6 @@ export default {
 
         // 2. 删除频道项
         this.myChannels.splice(index, 1)
-
         // 3. 如果删除的激活频道之前的频道，则更新激活的频道项
         // 参数1：要删除的元素的开始索引（包括）
         // 参数2：删除的个数，如果不指定，则从参数1开始一直删除到最后

@@ -5,7 +5,7 @@
             <van-icon slot="left" name="cross" @click="$router.back()" />
         </van-nav-bar>
         <!-- /导航栏 -->
-
+        
         <!-- 登录表单 -->
         <!--
 		      表单验证：

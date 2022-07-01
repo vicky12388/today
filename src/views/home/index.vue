@@ -2,11 +2,20 @@
   <div class="home-container">
     <!-- 导航栏 -->
     <van-nav-bar class="page-nav-bar" fixed>
+      <template #left>
+        <i class="toutiao toutiao-gengduo" @click="isChennelEditShow1 = true"></i>
+
+      </template>
+      <a href="">123</a>
       <van-button class="search-btn" slot="title" type="info" size="small" round icon="search" to="/search">搜索
       </van-button>
+      <template #right>
+
+        <i class="toutiao toutiao-gengduo" @click="isChennelEditShow2 = true"></i>
+      </template>
     </van-nav-bar>
     <!-- /导航栏 -->
-
+    
     <!-- 频道列表 -->
     <!--
       通过 v-model 绑定当前激活标签对应的索引值，默认情况下启用第一个标签
@@ -28,6 +37,14 @@
 
     <!-- 频道编辑弹出层 -->
     <van-popup v-model="isChennelEditShow" closeable close-icon-position="top-left" position="bottom"
+      :style="{ height: '100%' }">
+      <channel-edit :my-channels="channels" :active="active" @update-active="onUpdateActive" />
+    </van-popup>
+    <van-popup v-model="isChennelEditShow1" closeable close-icon-position="top-left" position="left"
+      :style="{ height: '100%' }">
+      <channel-edit :my-channels="channels" :active="active" @update-active="onUpdateActive" />
+    </van-popup>
+    <van-popup v-model="isChennelEditShow2" closeable close-icon-position="top-left" position="right"
       :style="{ height: '100%' }">
       <channel-edit :my-channels="channels" :active="active" @update-active="onUpdateActive" />
     </van-popup>
@@ -53,7 +70,9 @@ export default {
     return {
       active: 0,
       channels: [], // 频道列表
-      isChennelEditShow: false // 控制编辑频道弹出层的显示状态
+      isChennelEditShow: false,
+      isChennelEditShow1: false,
+      isChennelEditShow2: false, // 控制编辑频道弹出层的显示状态
     }
   },
   computed: {
@@ -102,7 +121,6 @@ export default {
         this.$toast('获取频道数据失败')
       }
     },
-
     onUpdateActive(index, isChennelEditShow = true) {
       // 更新激活的频道项
       this.active = index
@@ -119,12 +137,10 @@ export default {
   padding-top: 174px;
   padding-bottom: 100px;
 
-  .van-nav-bar__title {
-    max-width: unset;
-  }
+
 
   .search-btn {
-    width: 555px;
+    width: 450px;
     height: 64px;
     background-color: #5babfb;
     border: none;
