@@ -59,6 +59,7 @@
 		  props: {},
 		  data () {
 		    return {
+                //建议组件
 		      searchText: '',
 		      isResultShow: false, // 控制搜索结果的展示
 		      searchHistories: getItem('TOUTIAO_SEARCH_HISTORIES') || [] // 搜索的历史记录数据
@@ -67,6 +68,9 @@
 		  computed: {},
 		  watch: {
 		    searchHistories (value) {
+                if(value.length > 10){
+                    return value.splice(9,1)
+                }
 		      setItem('TOUTIAO_SEARCH_HISTORIES', value)
 		    }
 		    // searchHistories: {

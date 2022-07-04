@@ -8,11 +8,6 @@
 	    >
 	      <div slot="title" v-html="highlight(text)"></div>
 	    </van-cell>
-	    <!-- 双花括号绑定会直接输出纯文本内容 -->
-	    <!-- <div>{{ htmlStr }}</div> -->
-
-	    <!-- 使用 v-html 指令可以绑定渲染带有 HTML 标签的字符串 -->
-	    <!-- <div v-html="htmlStr"></div> -->
 	  </div>
 	</template>
 
@@ -34,7 +29,6 @@
 	  data () {
 	    return {
 	      suggestions: [], // 联想建议数据列表
-	      htmlStr: 'Hello <span style="color: red">World</span>'
 	    }
 	  },
 	  computed: {},

@@ -61,7 +61,7 @@
 		        this.loading = false
 
 		        // 4. 判断是否还有数据
-		        if (results.length) {
+		        if (results.length && this.page<2) {
 		          // 如果有，则更新获取下一个数据的页码
 		          this.page++
 		        } else {

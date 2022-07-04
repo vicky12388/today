@@ -2,17 +2,15 @@
   <div class="home-container">
     <!-- 导航栏 -->
     <van-nav-bar class="page-nav-bar" fixed>
-      <template #left>
-        <i class="toutiao toutiao-gengduo" @click="isChennelEditShow1 = true"></i>
-
-      </template>
-      <a href="">123</a>
-      <van-button class="search-btn" slot="title" type="info" size="small" round icon="search" to="/search">搜索
-      </van-button>
-      <template #right>
-
-        <i class="toutiao toutiao-gengduo" @click="isChennelEditShow2 = true"></i>
-      </template>
+      <van-button
+        class="search-btn"
+        slot="title"
+        type="info"
+        size="small"
+        round
+        icon="search"
+        to="/search"
+      >搜索</van-button>
     </van-nav-bar>
     <!-- /导航栏 -->
     
@@ -40,14 +38,7 @@
       :style="{ height: '100%' }">
       <channel-edit :my-channels="channels" :active="active" @update-active="onUpdateActive" />
     </van-popup>
-    <van-popup v-model="isChennelEditShow1" closeable close-icon-position="top-left" position="left"
-      :style="{ height: '100%' }">
-      <channel-edit :my-channels="channels" :active="active" @update-active="onUpdateActive" />
-    </van-popup>
-    <van-popup v-model="isChennelEditShow2" closeable close-icon-position="top-left" position="right"
-      :style="{ height: '100%' }">
-      <channel-edit :my-channels="channels" :active="active" @update-active="onUpdateActive" />
-    </van-popup>
+
     <!-- /频道编辑弹出层 -->
   </div>
 </template>
